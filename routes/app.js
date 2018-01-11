@@ -1,23 +1,30 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const Task = require('../models/task');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'SimpleApp' });
+  res.render('index', { title: 'Task Manager', msg: 'Add \'em here' });
 });
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-    res.send('respond with a resource');
+//GET page to task
+router.get('/addTask', function (req, res, next) {
+    res.render('addTask');
 });
 
+//POST tasks to user
+//Task not yet uniquely connected to user
 router.post('/addTask', function (req, res, next) {
-    var task = req.body.message;
-    res.redirect('/', {task: task});
-});
+    let task = new Task({
+        task: req.body.task,
+    });
 
-router.get('/tasks', function (req, res, next) {
-    res.render('index');
+    task.save((err) => {
+        if (err)
+            throw err;
+
+        res.redirect('/addTask');
+    });
 });
 
 module.exports = router;

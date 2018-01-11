@@ -1,4 +1,10 @@
-<h3>Add Tasks</h3>
+{{!-- {{Create tasks page}} --}}
+
+<h1>Tasks: {{tasks}}</h1>
+<br>
+<h3>Add Tasks Here</h3>
+<br>
 <form action="/addTask" method="post">
-    <input type="text" name="task">
+    <input type="text" name="task" required />
+    <input type="submit" value="Add" />
 </form>
