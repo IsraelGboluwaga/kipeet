@@ -1,8 +1,16 @@
+html {
+    overflow-y: scroll;
+}
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    padding: 80px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+#todo-list {
+    margin-bottom: 30px;
 }
 
 a {
-  color: #00B7FF;
+    color: #00B7FF;
 }

@@ -6,7 +6,9 @@ const User = require('../models/user');
 /* GET home page for unregistered users */
 router.get('/', function (req, res, next) {
     res.render('index', {
-        title: 'Task Manager'
+        title: 'Task Manager',
+        header: 'My header',
+        msg: 'Test message'
     });
 });
 

@@ -1,0 +1,37 @@
+{{-- This and add task will still be the same --}}
+
+
+<div class="container">
+    <!--Header-->
+    <div class="jumbotron text-center">
+        <h2>Todo: <span class="label label-info">{{ header }}</span></h2>
+    </div>
+
+    <!--Todo List-->
+    <div id="todo-list" class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+            <!--LOOP OVER THE TODOS IN $scope.todos-->
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"> {{ msg }}
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div id="todo-form" class="row">
+        <div class="col-sm-8 col-sm-offset-2 text-center">
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control input-lg text-center"
+                           placeholder="I want to build a big house for my mama">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-large">Add</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
