@@ -1,19 +1,29 @@
 const express = require('express');
 const router = express.Router();
+
 const Task = require('../models/task');
 const User = require('../models/user');
 
+const appName = 'kipeet';
+
+
 /* GET home page for unregistered users */
 router.get('/', function (req, res, next) {
-    res.render('index', {
-        title: 'Task Manager',
-        header: 'My header',
-        msg: 'Test message'
-    });
+    let welcome_message = ' makes sure you have your secrets kept. Todos, memories, plans,\n' +
+        '                    structures... name it! IN cases\n' +
+        '                    of a lost or damaged device, guess who you could count on?';
+
+    let pass = {
+        title: appName,
+        header: appName,
+        welcome_message: welcome_message
+    };
+
+    res.render('index', pass);
 });
 
 //User's sign up
-router.post('/', function (req, res, next) {
+router.post('/', (req, res, next) => {
     let username = req.body.username;
     let password = req.body.password;
     let email = req.body.email;
@@ -27,21 +37,30 @@ router.post('/', function (req, res, next) {
     });
 
     user.save((err, doc) => {
-       if (err)
-           throw err;
+        if (err)
+            throw err;
 
         if (doc)
-            res.redirect('/:user');
+        res.redirect('/:user');
     });
 });
 
-//User's login here
-//
-//
-//
+//Get user's login here
+router.get('/login', (req, res, next) => {
+    let user_welcome = 'Welcome back, yo! I kept all your stuff safe for you. Just the way you left it.';
+    let pass = {
+        header: appName,
+        user_welcome: user_welcome
+    };
+
+    res.render('login', pass);
+});
+
+//Post user's login data for auth here then redirect to home page
+
 
 //User's home
-router.get('/:user', function (req, res, next) {
+router.get('/:user', (req, res, next) => {
     res.render('user', {
         name: req.params.user,
         tasks: req.body.tasks
@@ -49,7 +68,7 @@ router.get('/:user', function (req, res, next) {
 });
 
 //GET page to task
-router.get('/addTask', function (req, res, next) {
+router.get('/addTask', (req, res, next) => {
     res.render('addTask');
 });
 
