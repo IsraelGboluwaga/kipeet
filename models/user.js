@@ -6,8 +6,8 @@ const uniqueValidator = require('mongoose-unique-validator');
 let userModel = new Schema({
     username: {type: String, required: true},
     password: {type: String, required: true},
-    email: {type: String, required: false},
-    phone: {type: Number, required: false},
+    email: {type: String, required: true},
+    phone: {type: Number, required: true},
     task: {type: Schema.Types.ObjectId, ref: 'Task'}
 });
 

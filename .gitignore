@@ -1,3 +1,5 @@
 .idea/
 node_modules/
 .idea/workspace.xml
+todo.txt
+public/bower_components/
