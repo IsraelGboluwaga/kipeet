@@ -1,10 +1,27 @@
 html {
     overflow-y: scroll;
+    height: 100%;
 }
 
 body {
-    padding: 80px;
+    background: #222 url("../img/banjo.jpg") center no-repeat;
+    background-size: cover;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    height: 100%;
+    padding: 80px;
+}
+
+#header {
+    color: #5bc0de;
+}
+
+#cover {
+    background-color: white;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    margin: 0 8rem;
+    padding: 30px;
 }
 
 #todo-list {
