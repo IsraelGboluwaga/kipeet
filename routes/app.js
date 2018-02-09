@@ -47,7 +47,7 @@ router.post('/', (req, res, next) => {
 
 //Get user's login here
 router.get('/login', (req, res, next) => {
-    let user_welcome = 'Welcome back, yo! I kept all your stuff safe for you. Just the way you left it.';
+    let user_welcome = 'Welcome back! I kept all your stuff safe for you. Just the way you left it.';
     let pass = {
         header: appName,
         user_welcome: user_welcome
