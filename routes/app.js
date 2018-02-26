@@ -3,8 +3,9 @@ const router = express.Router();
 
 const Task = require('../models/task');
 const User = require('../models/user');
+const Utils = require('../config/utils');
 
-const appName = 'kipeet';
+const appName = require('../config/constants').APP_NAME;
 
 
 /* GET home page for unregistered users */
@@ -29,12 +30,14 @@ router.post('/', (req, res, next) => {
     let email = req.body.email;
     let phone = req.body.phone;
 
-    let user = new User({
+    let params = {
         username: username,
         password: password,
         email: email,
         phone: phone
-    });
+    };
+
+    let user = new User(params);
 
     user.save((err, doc) => {
         if (err)

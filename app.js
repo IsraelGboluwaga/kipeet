@@ -14,6 +14,9 @@ let app = express();
 
 //Set db connection
 mongoose.connect(db.url);
+mongoose.Promise = global.Promise;
+let db_connection = mongoose.connection;
+db_connection.on('error', console.error.bind(console, 'MongoDB connection error: '));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
