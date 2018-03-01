@@ -26,25 +26,21 @@ router.post('/', (req, res, next) => {
 
 
     if (!username && !password && !email && !phone) {
-        console.log('1');
         pass.error_message = constants.EMPTY_PARAMS;
         res.redirect('/')
     }
 
     if (!check.email(email)) {
-        console.log('2');
         pass.error_message = constants.INVALID_EMAIL;
         res.redirect('/')
     }
 
     if (!check.username(username)) {
-        console.log('3');
         pass.error_message = constants.INVALID_USERNAME;
         res.redirect('/')
     }
 
     if (!check.phone(phone)) {
-        console.log('4');
         pass.error_message = constants.INVALID_PHONE;
         res.redirect('/')
     }
