@@ -61,7 +61,7 @@ body {
     -webkit-border-radius: 12px;
     -moz-border-radius: 12px;
     border-radius: 12px;
-    padding: 30px;
+    padding: 1rem;
     /*height: 100%;*/
 }
 
@@ -76,4 +76,10 @@ a {
 #typedJS {
     color: #5bc0de;
     position: relative;
+}
+
+#error-div {
+    background-color: inherit;
+    color: #f54739;
+    padding: 1rem 1rem 1rem 3rem;
 }

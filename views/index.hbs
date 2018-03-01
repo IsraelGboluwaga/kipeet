@@ -12,11 +12,16 @@
                 <p class="text-sm-center  position-relative"><em>{{ header }}</em> {{ welcome_message }}</p>
 
                 <p><h4 class="text-xs-center" id="typedJS"></h4></p>
+                {{#if error_message}}
+                    <div id="error-div" class="text-sm-center position-relative">
+                        {{ error_message }}
+                    </div>
+                {{/if}}
 
                 <form action="/" method="post" class="form-control-static">
                     <div class="form-group">
                         <label class="sr-only">username</label>
-                        <input type="text" class="form-control form-control-sm" placeholder="Username" name="username"
+                        <input type="text" class="form-control form-control-sm" placeholder="Username" name="username" maxlength="20"
                                required="required"/>
                     </div>
                     <div class="form-group">
@@ -26,12 +31,13 @@
                     </div>
                     <div class="form-group">
                         <label class="sr-only">email</label>
-                        <input type="text" class="form-control form-control-sm" placeholder="Email" name="email"
+                        <input type="email" class="form-control form-control-sm" placeholder="Email" name="email"
                                required="required"/>
                     </div>
                     <div class="form-group">
                         <label class="sr-only">phone</label>
-                        <input type="tel" class="form-control form-control-sm" placeholder="Phone Number" name="phone"/>
+                        <input type="tel" class="form-control form-control-sm" placeholder="Phone Number" name="phone" maxlength="11"
+                               required="required"/>
                     </div>
                     <button class="btn btn-info form-control">Sign Up</button>
                 </form>

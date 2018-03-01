@@ -1,74 +1,39 @@
 const constants = require('./constants');
-let regex, exists;
+let regex, regObj;
 
 let check = {
-    username: function (user, username) {
-        regex = '/^(?=.*[a-z])[a-z0-9]{4,20}$/gm';
-        if (!username.match(regex)){
+    username: function (username) {
+        regex = '^[a-zA-Z0-9_]{1,15}$';
+        regObj = new RegExp(regex);
+
+        if (!regObj.test(username)) {
             throw constants.INVALID_USERNAME;
         }
 
-        //Check if it's in db
-        exists = user.findOne(
-            {username: username},
-            (err, doc) => {
-                if (err)
-                    throw err;
-
-                if (doc)
-                    return doc;
-            });
-
-        if (exists) {
-            throw constants.USERNAME_ALREADY_EXISTS;
-        }
         return username;
-
     },
-    email: function (user, email) {
-        regex = '/^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$/gm';
-        if (!email.match(regex)) {
-            throw constants.INVALID_EMAIL;
+    email: function (email) {
+        regex = '^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$';
+        regObj = new RegExp(regex);
+
+        if (!regObj.test(email.trim())) {
+            return false;
         }
 
-        //Check db
-        exists = user.findOne(
-            {email: email},
-            (err, doc) => {
-                if (err)
-                    throw err;
-
-                if (doc)
-                    return doc;
-            });
-
-        if (exists) {
-            throw constants.EMAIL_ALREADY_EXISTS;
-        }
         return email;
     },
-    phone: function (user, phone) {
-        regex = '/[2-9]{2}\\d{8}/gm'; //for 10-digit phone numbers
-        if (!phone.match(regex)) {
+    phone: function (phone) {
+        regex = '^(([0-9]|\\+)(\\d{9})|(\\d{11}))$';
+        //This only allows + at the beginning; it requires 3 digits, followed by an optional dash, followed by 6-12 more digits
+        regObj = new RegExp(regex);
+
+        if (!regObj.test(phone)) {
             throw constants.INVALID_PHONE
         }
 
-        //Check db
-        exists = user.findOne(
-            {phone: phone},
-            (err, doc) => {
-                if (err)
-                    throw err;
-
-                if (doc)
-                    return doc;
-            }
-        );
-
-        if (exists) {
-            throw constants.PHONE_ALREADY_EXISTS;
-        }
         return phone;
     }
 
 };
+
+module.exports = check;

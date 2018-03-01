@@ -1,8 +1,12 @@
+setTimeout(function () {
+    $("#error-div").hide(500).empty();
+}, 2500);
+
 let options = {
     strings: ['"kipeet"'],
     typeSpeed: 60,
     // time before typing starts
-    startDelay: 2500,
+    startDelay: 3000,
     // backspacing speed
     backSpeed: 200,
     // time before backspacing
@@ -22,4 +26,3 @@ let options = {
 };
 
 let typed = new Typed("#typedJS", options);
-
