@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // Enable CORS from client-side
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header('Access-Control-Allow-Methods', 'PUT, GET, POST,PATCH, DELETE, OPTIONS');
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials");
@@ -58,13 +58,25 @@ app.use('/', appRoutes);
 app.use('/login', login);
 app.use('/user', activity);
 app.use('/logout', logout);
+app.get('*', function (req, res) {
+    res.status(404);
+    res.render('404');
+});
 
 //use sessions for tracking logins
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: true,
-    saveUninitialized: false
-}));
+let sess =
+    {
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: true,
+        cookie: {},
+    };
+
+if (app.get('env') === 'production') {
+    app.set('trust proxy', 1); // trust first proxy
+    sess.cookie.secure = true; // serve secure cookies
+}
+app.use(session(sess));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

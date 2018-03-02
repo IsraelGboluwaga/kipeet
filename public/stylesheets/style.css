@@ -62,7 +62,6 @@ body {
     -moz-border-radius: 12px;
     border-radius: 12px;
     padding: 1rem;
-    /*height: 100%;*/
 }
 
 #todo-list {
@@ -81,5 +80,28 @@ a {
 #error-div {
     background-color: inherit;
     color: #f54739;
-    padding: 1rem 1rem 1rem 3rem;
+    padding: 1rem 1rem 1rem 1rem;
+    text-align: center;
+}
+
+.center {
+    text-align: center;
+}
+
+#error-404-figure {
+    color: #5bc0de;
+    font-size: 1350%;
+    letter-spacing: 0.5rem;
+    padding: 2rem;
+}
+
+#error-404-text {
+    border-radius: 12px;
+    background-color: #5bc0de;
+    color: #ffffff;
+    font-size: 200%;
+    font-weight: bolder;
+    letter-spacing: 0.5rem;
+    margin: auto 5rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
 }
