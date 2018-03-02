@@ -2,7 +2,7 @@ setTimeout(function () {
     $("#error-div").hide(500).empty();
 }, 2500);
 
-let options = {
+const options = {
     strings: ['"kipeet"'],
     typeSpeed: 60,
     // time before typing starts

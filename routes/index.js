@@ -52,7 +52,7 @@ router.post('/', (req, res, next) => {
         phone: phone
     };
 
-    let newUser = new User(params);
+    const newUser = new User(params);
 
     newUser.save((err, user, next) => {
         if (err) {
