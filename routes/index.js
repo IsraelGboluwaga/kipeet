@@ -27,22 +27,22 @@ router.post('/', (req, res, next) => {
 
     if (!username && !password && !email && !phone) {
         templateText.error_message = constants.EMPTY_PARAMS;
-        res.redirect('/')
+        return res.redirect('/')
     }
 
     if (!check.email(email)) {
         templateText.error_message = constants.INVALID_EMAIL;
-        res.redirect('/')
+        return res.redirect('/')
     }
 
     if (!check.username(username)) {
         templateText.error_message = constants.INVALID_USERNAME;
-        res.redirect('/')
+        return res.redirect('/')
     }
 
     if (!check.phone(phone)) {
         templateText.error_message = constants.INVALID_PHONE;
-        res.redirect('/')
+        return res.redirect('/')
     }
 
     const params = {
@@ -65,7 +65,7 @@ router.post('/', (req, res, next) => {
                 userId: user._id
             };
 
-        res.redirect(`/user/${user.username}`);
+        return res.redirect(`/user/${user.username}`);
     });
 });
 

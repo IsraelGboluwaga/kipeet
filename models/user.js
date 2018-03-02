@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const constants = require('../config/constants');
 
 
-let userModel = new Schema({
+const userModel = new Schema({
     username: {type: String, unique: true, required: true},
     password: {type: String, required: true},
     email: {type: String, unique: true, required: true},
