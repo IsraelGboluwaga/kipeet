@@ -1,7 +1,7 @@
 const constants = require('./constants');
 let regex, regObj;
 
-let check = {
+const check = {
     username: function (username) {
         regex = '^[a-zA-Z0-9_]{1,15}$';
         regObj = new RegExp(regex);

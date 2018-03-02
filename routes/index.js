@@ -6,7 +6,7 @@ const constants = require('../config/constants');
 const check = require('../config/utils');
 const appName = constants.APP_NAME;
 
-let pass = {
+const templateText = {
     title: appName,
     header: appName,
     welcome_message: constants.WELCOME_MESSAGE
@@ -14,49 +14,49 @@ let pass = {
 
 /* GET home page for unregistered users */
 router.get('/', function (req, res, next) {
-    res.render('index', pass);
+    res.render('index', templateText);
 });
 
 //User's sign up
 router.post('/', (req, res, next) => {
-    let username = req.body.username;
-    let password = req.body.password;
-    let email = req.body.email;
-    let phone = req.body.phone;
+    const username = req.body.username;
+    const password = req.body.password;
+    const email = req.body.email;
+    const phone = req.body.phone;
 
 
     if (!username && !password && !email && !phone) {
-        pass.error_message = constants.EMPTY_PARAMS;
-        res.redirect('/')
+        templateText.error_message = constants.EMPTY_PARAMS;
+        return res.redirect('/')
     }
 
     if (!check.email(email)) {
-        pass.error_message = constants.INVALID_EMAIL;
-        res.redirect('/')
+        templateText.error_message = constants.INVALID_EMAIL;
+        return res.redirect('/')
     }
 
     if (!check.username(username)) {
-        pass.error_message = constants.INVALID_USERNAME;
-        res.redirect('/')
+        templateText.error_message = constants.INVALID_USERNAME;
+        return res.redirect('/')
     }
 
     if (!check.phone(phone)) {
-        pass.error_message = constants.INVALID_PHONE;
-        res.redirect('/')
+        templateText.error_message = constants.INVALID_PHONE;
+        return res.redirect('/')
     }
 
-    let params = {
+    const params = {
         username: username,
         password: password,
         email: email,
         phone: phone
     };
 
-    let newUser = new User(params);
+    const newUser = new User(params);
 
     newUser.save((err, user, next) => {
         if (err) {
-            console.log(err);
+            JSON.stringify(err);
             return next(err);
         }
 
@@ -65,7 +65,7 @@ router.post('/', (req, res, next) => {
                 userId: user._id
             };
 
-        res.redirect(`/user/${user.username}`);
+        return res.redirect(`/user/${user.username}`);
     });
 });
 

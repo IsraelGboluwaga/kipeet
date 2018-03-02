@@ -14,12 +14,12 @@ const login = require('./routes/login');
 const logout = require('./routes/logout');
 
 require('dotenv').config();
-let app = express();
+const app = express();
 
 //Set db connection
 mongoose.connect(process.env.DB_URL);
 mongoose.Promise = global.Promise;
-let db_connection = mongoose.connection;
+const db_connection = mongoose.connection;
 db_connection.on('error', console.error.bind(console, 'MongoDB connection error: '));
 
 // view engine setup
