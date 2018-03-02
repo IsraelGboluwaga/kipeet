@@ -5,19 +5,27 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const db = require('./config/database');
+const session = require('express-session');
+const hbs = require('hbs');
 
+const appRoutes = require('./routes/index');
+const activity = require('./routes/activity');
+const login = require('./routes/login');
+const logout = require('./routes/logout');
 
-const appRoutes = require('./routes/app');
-
-let app = express();
+require('dotenv').config();
+const app = express();
 
 //Set db connection
-mongoose.connect(db.url);
+mongoose.connect(process.env.DB_URL);
+mongoose.Promise = global.Promise;
+const db_connection = mongoose.connection;
+db_connection.on('error', console.error.bind(console, 'MongoDB connection error: '));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+hbs.registerPartials(__dirname + '/views/partials');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -31,6 +39,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //For routing. I think it's good practice to have the app routing somewhere else
 app.use('/', appRoutes);
+app.use('/login', login);
+app.use('/user', activity);
+app.use('/logout', logout);
+
+//use sessions for tracking logins
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: false
+}));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

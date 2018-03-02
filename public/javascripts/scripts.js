@@ -1,17 +1,20 @@
+setTimeout(function () {
+    $("#error-div").hide(500).empty();
+}, 2500);
 
-let options = {
+const options = {
     strings: ['"kipeet"'],
     typeSpeed: 60,
     // time before typing starts
-    startDelay: 2500,
+    startDelay: 3000,
     // backspacing speed
-    // backSpeed: 30,
+    backSpeed: 200,
     // time before backspacing
-    // backDelay: 5000,
+    backDelay: 5000,
     // loop
-    // loop: false,
+    loop: true,
     // false = infinite
-    // loopCount: 5,
+    loopCount: 5,
     // show cursor
     showCursor: false,
     // character for cursor
@@ -22,5 +25,4 @@ let options = {
     contentType: 'html',
 };
 
-let typed = new Typed ("#typedJS", options);
-
+let typed = new Typed("#typedJS", options);
