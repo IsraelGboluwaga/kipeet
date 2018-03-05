@@ -131,8 +131,23 @@ const login = (req, res, next) => {
     })
 };
 
+const logout = (req, res, next) => {
+    if (req.session) {
+        // delete session object
+        req.session.destroy(function (err) {
+            if (err)
+                return next(err);
+
+            return res.redirect('/');
+
+        });
+    } else {
+        return res.redirect('/');
+    }
+};
 
 module.exports = {
     register,
-    login
+    login,
+    logout
 };
