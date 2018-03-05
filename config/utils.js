@@ -33,7 +33,7 @@ const check = {
     }
 };
 
-let usernameExists = (user) => {
+const usernameExists = (user) => {
     return User.findOne(
         {username: user.username}
     ).then(
@@ -48,7 +48,7 @@ let usernameExists = (user) => {
     });
 };
 
-let emailExists = (user) => {
+const emailExists = (user) => {
     return User.findOne(
         {email: user.email}
     ).then(
@@ -63,7 +63,7 @@ let emailExists = (user) => {
     });
 };
 
-let phoneExists = (user) => {
+const phoneExists = (user) => {
     return User.findOne(
         {phone: user.phone}
     ).then(
@@ -78,7 +78,7 @@ let phoneExists = (user) => {
     });
 };
 
-let userExists = (user) => {
+const userExists = (user) => {
     return User.findOne(
         {
             username: user.username,
