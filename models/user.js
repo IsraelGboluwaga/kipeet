@@ -16,7 +16,7 @@ const userSchema =
 
 //authenticate input against database
 userSchema.statics.authenticate = (email, password, next) => {
-    User.findOne({email: email})
+    User.findOne({email})
         .exec(function (err, user) {
             if (err) {
                 return next(err)
