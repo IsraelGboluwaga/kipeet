@@ -1,6 +1,6 @@
 setTimeout(function () {
     $("#error-div").hide(500).empty();
-}, 2500);
+}, 3500);
 
 const options = {
     strings: ['"kipeet"'],

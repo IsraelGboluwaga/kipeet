@@ -1,23 +1,23 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const uniqueValidator = require('mongoose-unique-validator');
 const bcrypt = require('bcrypt');
-const constants = require('../config/constants');
 
 
-const userModel = new Schema({
-    username: {type: String, unique: true, required: true},
-    password: {type: String, required: true},
-    email: {type: String, unique: true, required: true},
-    phone: {type: Number, unique: true, required: true},
-    task: {type: Schema.Types.ObjectId, ref: 'Task'}
-});
+const userSchema =
+    new Schema({
+        username: {type: String, required: true},
+        password: {type: String, required: true},
+        email: {type: String, required: true},
+        phone: {type: Number, required: true},
+        task: {type: Schema.Types.ObjectId, ref: 'Task'},
+        created_at: {type: Date, default: Date.now()}
+    });
 
-userModel.plugin(uniqueValidator, {message: constants.PATH_NOT_UNIQUE});
+
 
 //authenticate input against database
-userModel.statics.authenticate = (email, password, next) => {
-    userModel.findOne({email: email})
+userSchema.statics.authenticate = (email, password, next) => {
+    userSchema.findOne({email: email})
         .exec(function (err, user) {
             if (err) {
                 return next(err)
@@ -38,7 +38,7 @@ userModel.statics.authenticate = (email, password, next) => {
 };
 
 
-userModel.pre('save', function (next) {
+userSchema.pre('save', function (next) {
     let user = this;
     bcrypt.hash(user.password, 10, (err, hash) => {
         if (err)
@@ -46,8 +46,7 @@ userModel.pre('save', function (next) {
 
         user.password = hash;
         next();
-    })
+    });
 });
 
-
-module.exports = mongoose.model('User', userModel);
+module.exports = mongoose.model('User', userSchema);
