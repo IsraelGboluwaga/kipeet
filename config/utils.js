@@ -37,11 +37,11 @@ let usernameExists = (user) => {
     return User.findOne(
         {username: user.username}
     ).then(
-        (user) => {
-            if (user)
-                return true;
+        (err, username, next) => {
+            if (err)
+                return next(err);
 
-            return false;
+            return !!username;
         }
     ).catch((error) => {
         throw error;
@@ -52,11 +52,11 @@ let emailExists = (user) => {
     return User.findOne(
         {email: user.email}
     ).then(
-        (user) => {
-            if (user)
-                return true;
+        (err, email, next) => {
+            if (err)
+                return next(err);
 
-            return false;
+            return !!email;
         }
     ).catch((error) => {
         throw error;
@@ -67,11 +67,11 @@ let phoneExists = (user) => {
     return User.findOne(
         {phone: user.phone}
     ).then(
-        (user) => {
-            if (user)
-                return true;
+        (err, phone, next) => {
+            if (err)
+                return next(err);
 
-            return false;
+            return !!phone;
         }
     ).catch((error) => {
         throw error;

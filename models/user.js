@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-// const uniqueValidator = require('mongoose-unique-validator');
 const bcrypt = require('bcrypt');
-const constants = require('../config/constants').constants;
 
 
 let userSchema =
@@ -16,7 +14,6 @@ let userSchema =
     });
 
 
-// userSchema.plugin(uniqueValidator, {message: constants.PATH_NOT_UNIQUE});
 
 //authenticate input against database
 userSchema.statics.authenticate = (email, password, next) => {
