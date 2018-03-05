@@ -1,4 +1,6 @@
 let regex, regObj;
+const User = require('../models/user');
+
 
 const check = {
     username: function (username) {
@@ -29,7 +31,79 @@ const check = {
 
         return phone;
     }
-
 };
 
-module.exports = check;
+let usernameExists = (user) => {
+    return User.findOne(
+        {username: user.username}
+    ).then(
+        (user) => {
+            if (user)
+                return true;
+
+            return false;
+        }
+    ).catch((error) => {
+        throw error;
+    });
+};
+
+let emailExists = (user) => {
+    return User.findOne(
+        {email: user.email}
+    ).then(
+        (user) => {
+            if (user)
+                return true;
+
+            return false;
+        }
+    ).catch((error) => {
+        throw error;
+    });
+};
+
+let phoneExists = (user) => {
+    return User.findOne(
+        {phone: user.phone}
+    ).then(
+        (user) => {
+            if (user)
+                return true;
+
+            return false;
+        }
+    ).catch((error) => {
+        throw error;
+    });
+};
+
+let userExists = (user) => {
+    return User.findOne(
+        {
+            username: user.username,
+            email: user.email,
+            phone: user.phone
+        }
+    ).then(
+        (err, user, next) => {
+            if (err)
+                return next(err);
+
+            return !!user;
+        }
+    ).catch((error) => {
+        throw error;
+    });
+};
+
+
+
+module.exports =
+    {
+        check,
+        emailExists,
+        phoneExists,
+        usernameExists,
+        userExists
+    };

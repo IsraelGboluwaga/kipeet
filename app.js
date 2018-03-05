@@ -47,6 +47,22 @@ app.use(function (req, res, next) {
     next();
 });
 
+//use sessions for tracking logins
+let sess =
+    {
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: true,
+        cookie: {},
+    };
+
+app.use(session(sess));
+
+if (app.get('env') === 'production') {
+    app.set('trust proxy', 1); // trust first proxy
+    sess.cookie.secure = true; // serve secure cookies
+}
+
 //For routing. I think it's good practice to have the app routing somewhere else
 app.use('/health', (req, res) => {
     return res.json({
@@ -62,21 +78,6 @@ app.get('*', function (req, res) {
     res.status(404);
     res.render('404');
 });
-
-//use sessions for tracking logins
-let sess =
-    {
-        secret: process.env.SESSION_SECRET,
-        resave: false,
-        saveUninitialized: true,
-        cookie: {},
-    };
-
-if (app.get('env') === 'production') {
-    app.set('trust proxy', 1); // trust first proxy
-    sess.cookie.secure = true; // serve secure cookies
-}
-app.use(session(sess));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

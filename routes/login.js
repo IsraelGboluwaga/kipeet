@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const constants = require('../config/constants');
+const Constants = require('../config/constants');
+const constants = Constants.constants;
+const templateText = Constants.loginTemplate;
 const check = require('../config/utils');
 const user = require('../models/user');
 
-let templateText = {
-    header: constants.APP_NAME,
-    user_welcome: constants.USER_WELCOME
-};
+
 
 
 //Get user's login here

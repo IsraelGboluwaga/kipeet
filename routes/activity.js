@@ -2,14 +2,28 @@ const express = require('express');
 const router = express.Router();
 
 const Task = require('../models/task');
+const User = require('../models/user');
 
+let error;
 
 //User's home
 router.get('/:username', (req, res, next) => {
-    res.render('user', {
-        name: req.params.username,
-        taskNumber: req.body.tasks ? req.body.tasks.length : 0
-    })
+    User.findById(req.session.userId)
+        .exec((err, user) => {
+            if (err)
+                return next(err);
+
+            if (!user) {
+                error = new Error('Not Authorized');
+                error.status = 403;
+                return res.redirect('/login')
+            } else {
+                res.render('user', {
+                    name: req.params.username,
+                    taskNumber: req.body.tasks ? req.body.tasks.length : 0
+                })
+            }
+        })
 });
 
 //GET page to task
