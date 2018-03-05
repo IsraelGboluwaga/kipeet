@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const hbs = require('hbs');
 
 const appRoutes = require('./routes/index');
@@ -48,19 +49,22 @@ app.use(function (req, res, next) {
 });
 
 //use sessions for tracking logins
-let sess =
+let session_data =
     {
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: true,
         cookie: {},
+        store: new MongoStore({
+            mongooseConnection: db_connection
+        })
     };
 
-app.use(session(sess));
+app.use(session(session_data));
 
 if (app.get('env') === 'production') {
     app.set('trust proxy', 1); // trust first proxy
-    sess.cookie.secure = true; // serve secure cookies
+    session_data.cookie.secure = true; // serve secure cookies
 }
 
 //For routing. I think it's good practice to have the app routing somewhere else
