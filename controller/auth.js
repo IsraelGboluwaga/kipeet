@@ -4,6 +4,7 @@ const ConstantClass = require("../config/constants");
 const Constants = ConstantClass.constants;
 const Figures = ConstantClass.figures;
 let templateText = ConstantClass.templateText;
+let loginTemplate = ConstantClass.loginTemplate;
 
 const register = (req, res) => {
     const username = req.body.username,
@@ -73,7 +74,9 @@ const register = (req, res) => {
         }
 
         if (resp) {
-            templateText.error_message = Constants.ALREADY_REGISTERED_USER;
+            err = new Error(Constants.ALREADY_REGISTERED_USER);
+            err.status = 400;
+            templateText.error_message = err.message;
             return res.redirect('/')
         }
         const newUser = new User(params);
@@ -89,14 +92,62 @@ const register = (req, res) => {
             res.redirect(`/user/${user.username}`);
         });
 
-    }).catch((err) => {
+    }).catch(() => {
         res.status(400);
         templateText.error_message = JSON.stringify(Constants.ERROR_OCCURRED);
         return res.redirect('/')
     });
 };
 
+const login = (req, res, next) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    let err;
+
+    if (!email && !password) {
+        err = new Error(Constants.EMPTY_PARAMS);
+        err.status = 400;
+        loginTemplate.error_message = err.message;
+        return res.redirect('/login')
+    }
+
+    if (!Utils.check.email(email)) {
+        err = new Error(Constants.INVALID_EMAIL);
+        err.status = 400;
+        loginTemplate.error_message = err.message;
+        return res.redirect('/login');
+    }
+
+    User.authenticate(email, password, (err, user) => {
+        if (err) {
+            loginTemplate.error_message = err.message;
+            return res.redirect('/login');
+        }
+
+        if (user) {
+            req.session.userId = user._id;
+            return res.redirect(`/user/${user.username}`);
+        }
+    })
+};
+
+const logout = (req, res, next) => {
+    if (req.session) {
+        // delete session object
+        req.session.destroy(function (err) {
+            if (err)
+                return next(err);
+
+            return res.redirect('/');
+
+        });
+    } else {
+        return res.redirect('/');
+    }
+};
 
 module.exports = {
-    register
+    register,
+    login,
+    logout
 };

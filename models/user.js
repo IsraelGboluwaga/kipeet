@@ -14,24 +14,26 @@ const userSchema =
     });
 
 
-
 //authenticate input against database
 userSchema.statics.authenticate = (email, password, next) => {
-    userSchema.findOne({email: email})
+    User.findOne({email})
         .exec(function (err, user) {
             if (err) {
                 return next(err)
             } else if (!user) {
-                // console.log('Here');
-                let err = new Error('User not found.');
+                err = new Error();
                 err.status = 401;
+                err.message = 'User not found';
                 return next(err);
             }
             bcrypt.compare(password, user.password, function (err, result) {
                 if (result === true) {
                     return next(null, user);
                 } else {
-                    return next();
+                    err = new Error();
+                    err.status = 400;
+                    err.message = 'Incorrect password';
+                    return next(err);
                 }
             })
         });
@@ -49,4 +51,5 @@ userSchema.pre('save', function (next) {
     });
 });
 
-module.exports = mongoose.model('User', userSchema);
+let User = mongoose.model('User', userSchema);
+module.exports = User;
