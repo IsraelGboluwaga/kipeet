@@ -9,11 +9,12 @@
                 <h1 class="display-4" id="header">{{ header }}</h1>
                 <br>
 
-                <p class="text-sm-center  position-relative"><em>{{ header }}</em> {{ welcome_message }}</p>
+                <p class="text-center  position-relative"><em>{{ header }}</em> {{ welcome_message }}</p>
 
-                <p><h4 class="text-xs-center" id="typedJS"></h4></p>
+                <p><h4 class="text-center" id="typedJS"></h4></p>
+
                 {{#if error_message}}
-                    <div id="error-div" class="text-sm-center position-relative">
+                    <div id="error-div" class="text-center position-relative">
                         {{ error_message }}
                     </div>
                 {{/if}}
@@ -44,14 +45,14 @@
                         <input type="password" class="form-control form-control-sm" placeholder="Confirm Password"
                                name="passwordConf" required="required"/>
                     </div>
-                    <button class="btn btn-info form-control">Sign Up</button>
+                    <button id="sign-up-btn" class="btn btn-info form-control">Sign Up</button>
                 </form>
 
                 <br>
 
-                <div class="text-xs-center">
+                <div class="text-center">
                     <p class="small">Already have an account?</p>
-                    <a href="/login" class="btn btn-info-outline" role="button">Login</a>
+                    <a href="/login" class="btn btn-outline-info" role="button">Login</a>
                 </div>
                 <br>
             </div>

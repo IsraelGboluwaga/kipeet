@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const Constants = require('../config/constants');
-const Authenticate = require('../controller/auth');
+const Auth = require('../controller/AuthController');
 
 
 /* GET home page for unregistered users */
@@ -15,6 +15,6 @@ router.get('/signup', (req, res) => {
 });
 
 //User's sign up
-router.post('/', Authenticate.register);
+router.post('/', Auth.register);
 
 module.exports = router;

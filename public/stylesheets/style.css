@@ -4,6 +4,7 @@ html {
 }
 
 body {
+    background: #222 url("../img/guitar.jpg") center no-repeat;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1rem;
     height: 100%;
@@ -11,49 +12,16 @@ body {
     padding: 3rem;
 }
 
-@media (min-width: 1200px) {
-    #body {
-        background: #222 url("../img/guitar.jpg") center no-repeat;
-        background-size: cover;
-        padding: 4rem 5rem 5rem 5rem;
-    }
-}
-
-@media (min-width: 992px) and (max-width: 1199px) {
-    #body {
-        background: #222 url("../img/guitar.jpg") center no-repeat;
-        background-size: cover;
-        padding: 4rem 5rem 5rem 5rem;
-    }
-}Wh
-
-@media (min-width: 768px) and (max-width: 991px) {
-    #body {
-        background: #222 url("../img/banjo.jpg") center no-repeat;
-        background-size: cover;
-    }
-}
-
-@media (max-width: 767px) {
-    #body {
+@media (max-width: 450px) {
+    body {
         background: none;
         background-size: cover;
-        margin: 0.1rem;
-        padding: 0.2rem;
-    }
-}
-
-@media (max-width: 480px) {
-    #body {
-        background: none;
-        background-size: cover;
-        margin: 0.1rem;
         padding: 0.2rem;
     }
 }
 
 #header {
-    color: #5bc0de;
+    color: #17a2b8;
 }
 
 #cover {
@@ -69,11 +37,20 @@ body {
 }
 
 a {
-    color: #00B7FF;
+    color: #17a2b8;
+}
+
+a.login {
+    color: #17a2b8;
+}
+
+a.login:hover {
+    font-weight: bolder;
+    text-decoration: none;
 }
 
 #typedJS {
-    color: #5bc0de;
+    color: #17a2b8;
     position: relative;
 }
 
@@ -84,15 +61,11 @@ a {
     text-align: center;
 }
 
-.center {
-    text-align: center;
-}
-
 #error-404-figure {
-    color: #5bc0de;
+    color: #17a2b8;
     font-size: 8rem;
     letter-spacing: 0.5rem;
-    padding: 2rem;
+    padding: 1rem;
 }
 
 #error-404-text {
@@ -102,6 +75,10 @@ a {
     font-size: 200%;
     font-weight: bolder;
     letter-spacing: 0.3rem;
-    margin: auto 5rem;
+    margin: auto;
     padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+}
+
+#sign-up-btn {
+    /*background-color: #5bc0de; border: none*/
 }

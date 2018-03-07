@@ -2,9 +2,11 @@ const Utils = require('../config/Utils');
 const User = require('../models/user');
 const ConstantClass = require("../config/constants");
 const Constants = ConstantClass.constants;
-const Figures = ConstantClass.figures;
-let templateText = ConstantClass.templateText;
-let loginTemplate = ConstantClass.loginTemplate;
+const ResponseMessages = ConstantClass.responseMessages;
+let Figures = ConstantClass.figures;
+let templateText = require('../config/constants').templateText;
+let loginTemplate = require('../config/constants').loginTemplate;
+
 
 const register = (req, res) => {
     const username = req.body.username,
@@ -60,12 +62,11 @@ const register = (req, res) => {
         return res.redirect('/')
     }
     const params = {
-        username: username,
-        password: password,
-        email: email,
-        phone: phone
+        username,
+        password,
+        email,
+        phone
     };
-
 
     Utils.userExists(params).then((err, resp) => {
         if (err) {
@@ -83,19 +84,20 @@ const register = (req, res) => {
 
         newUser.save((err, user) => {
             if (err) {
-                templateText.error_message = Constants.ERROR_OCCURRED;
+                templateText.error_message = Constants.ALREADY_REGISTERED_USER;
                 return res.redirect('/');
             }
+
             if (user) {
                 req.session.userId = user._id;
             }
-            res.redirect(`/user/${user.username}`);
+            return res.redirect(`/users/${user.username}`);
         });
 
     }).catch(() => {
         res.status(400);
-        templateText.error_message = JSON.stringify(Constants.ERROR_OCCURRED);
-        return res.redirect('/')
+        templateText.error_message = Constants.ERROR_OCCURRED;
+        return res.redirect('/');
     });
 };
 
@@ -137,17 +139,37 @@ const logout = (req, res, next) => {
         req.session.destroy(function (err) {
             if (err)
                 return next(err);
-
-            return res.redirect('/');
+            return res.redirect('/login');
 
         });
     } else {
-        return res.redirect('/');
+        return res.redirect('/login')
     }
+};
+
+const validateLoggedInUser = (req, res, next) => {
+    return User.findOne(
+        {
+            _id: req.session.userId,
+            username: req.params.username
+        },
+        (err, user) => {
+
+            if (err)
+                return next(err);
+
+            if (!user) {
+                templateText.error_message = ResponseMessages.NOT_AUTHORIZED;
+                return res.redirect('/login');
+            } else {
+                return next(null, user);
+            }
+        });
 };
 
 module.exports = {
     register,
     login,
-    logout
+    logout,
+    validateLoggedInUser
 };
