@@ -4,16 +4,20 @@ html {
 }
 
 body {
-    background: #222 url("../img/guitar.jpg") center no-repeat;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1rem;
     height: 100%;
     line-height: 1.5;
+}
+
+.photo-cover {
+    background: #222 url("../img/guitar.jpg") center no-repeat;
+    height: 100%;
     padding: 3rem;
 }
 
 @media (max-width: 450px) {
-    body {
+    .photo-cover {
         background: none;
         background-size: cover;
         padding: 0.2rem;
