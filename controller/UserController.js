@@ -1,4 +1,4 @@
-const Auth = require('./authController');
+const Auth = require('../controller/AuthController');
 const Dashboard = require('../config/constants').dashboard;
 
 

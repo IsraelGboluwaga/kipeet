@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const Constants = require('../config/constants');
-const Auth = require('../controller/AuthController');
+const Auth = require('../controller/authController');
 
 
 /* GET home page for unregistered users */
