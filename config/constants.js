@@ -49,4 +49,5 @@ module.exports.responseMessages = {
     TASK_DELETED: 'Task successfully deleted',
     NOT_AUTHORIZED: 'You are not authorized to access this resource',
     NOT_USER: `You\'re not registered in ${self.constants.APP_NAME} yet. Kindly click on register to signup.`,
+    INCORRECT_PASSWORD: 'Incorrect password. Please try again',
 };

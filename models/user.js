@@ -33,7 +33,7 @@ userSchema.statics.authenticate = (email, password, next) => {
                 } else {
                     err = new Error();
                     err.status = 400;
-                    err.message = 'Incorrect password. Please try again';
+                    err.message = ResponseMessages.INCORRECT_PASSWORD;
                     return next(err);
                 }
             })
