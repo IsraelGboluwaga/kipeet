@@ -20,7 +20,15 @@ body {
     .photo-cover {
         background: none;
         background-size: cover;
-        padding: 0.2rem;
+        padding: 0.1rem;
+    }
+
+    .cover {
+        background-color: white;
+        -webkit-border-radius: 12px;
+        -moz-border-radius: 12px;
+        border-radius: 12px;
+        padding: 0.1rem;
     }
 }
 
@@ -28,8 +36,7 @@ body {
     color: #17a2b8;
 }
 
-
-#cover {
+.cover {
     background-color: white;
     -webkit-border-radius: 12px;
     -moz-border-radius: 12px;
@@ -41,7 +48,7 @@ body {
     margin-bottom: 30px;
 }
 
-a {
+.app-color {
     color: #17a2b8;
 }
 
@@ -59,7 +66,7 @@ a.login:hover {
     position: relative;
 }
 
-#error-div {
+.error-div {
     background-color: inherit;
     color: #f54739;
     padding: 1rem 1rem 1rem 1rem;
@@ -75,15 +82,37 @@ a.login:hover {
 
 #error-404-text {
     border-radius: 12px;
-    background-color: #5bc0de;
+    background-color: #17a2b8;
     color: #ffffff;
     font-size: 200%;
     font-weight: bolder;
     letter-spacing: 0.3rem;
     margin: auto;
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    padding: 0.3rem 0.3rem 0.3rem 0.3rem;
 }
 
-#sign-up-btn {
-    /*background-color: #5bc0de; border: none*/
+#add-task-block {
+    display: none;
+}
+
+#cancel-add-task, #save-task {
+    display: none;
+    margin-left: 1rem;
+}
+
+.user-container {
+    padding: 2rem;
+}
+
+#add-and-cancel {
+    display: inline-flex;
+}
+
+.task-body-block {
+    display: none;
+    padding: 1rem;
+}
+
+.task-link {
+    color: #17a2b8;
 }

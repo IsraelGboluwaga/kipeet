@@ -154,22 +154,43 @@ const validateLoggedInUser = (req, res, next) => {
             username: req.params.username
         },
         (err, user) => {
-
-            if (err)
-                return next(err);
+            if (err) {
+                next(err);
+            }
 
             if (!user) {
                 templateText.error_message = ResponseMessages.NOT_AUTHORIZED;
                 return res.redirect('/login');
             } else {
-                return next(null, user);
+                return user;
             }
         });
+};
+
+const preventReloginOrSignup = (req, res, next) => {
+    if (req.session.userId) {
+        return User.findById(req.session.userId, (err, user) => {
+            if (err) {
+                next(err);
+            }
+
+            if (user) {
+                return user;
+            } else {
+                return next();
+            }
+        });
+    }
+
+    return new Promise((resolve, reject) => {
+        next();
+    })
 };
 
 module.exports = {
     register,
     login,
     logout,
-    validateLoggedInUser
+    validateLoggedInUser,
+    preventReloginOrSignup
 };

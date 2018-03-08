@@ -1,5 +1,12 @@
+console.log('Here');
+
+$('#add-task').on('click', function () {
+    console.log('Here 2');
+    $('#add-task-block').css('display', 'block')
+});
+
 setTimeout(function () {
-    $("#error-div").hide(500).empty();
+    $(".error-div").hide(500).empty();
 }, 3500);
 
 const options = {

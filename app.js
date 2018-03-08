@@ -54,6 +54,7 @@ let session_data =
         resave: false,
         saveUninitialized: true,
         cookie: {},
+        maxAge: 3600000,
         store: new MongoStore({
             mongooseConnection: db_connection
         })
