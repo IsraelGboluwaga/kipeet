@@ -86,11 +86,11 @@ const userExists = (user) => {
             phone: user.phone
         }
     ).then(
-        (err, user, next) => {
+        (err, user) => {
             if (err)
-                return next(err);
+                return err;
 
-            return !!user;
+            return user;
         }
     ).catch((error) => {
         throw error;

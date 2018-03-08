@@ -1,60 +1,63 @@
 {{!-- {{Add a sign in page}} --}}
+<div class="photo-cover">
+    <section class="cover">
+        <div class="container">
+            <div class="row">
 
-<section id="cover">
+                <div class="justify-content-center align-items-center" style="padding: 0.8rem">
+                    <h1 class="display-4" id="header">{{ header }}</h1>
+                    <br>
 
-    <div class="container">
-        <div class="row">
+                    <p class="text-center  position-relative"><em>{{ header }}</em> {{ welcome_message }}</p>
 
-            <div class="col-sm-10 col-sm-offset-1">
-                <h1 class="display-4" id="header">{{ header }}</h1>
-                <br>
+                    <p><h4 class="text-center" id="typedJS"></h4></p>
 
-                <p class="text-sm-center  position-relative"><em>{{ header }}</em> {{ welcome_message }}</p>
+                    {{#if error_message}}
+                        <div class="text-center position-relative error-div">
+                            {{ error_message }}
+                        </div>
+                    {{/if}}
 
-                <p><h4 class="text-xs-center" id="typedJS"></h4></p>
-                {{#if error_message}}
-                    <div id="error-div" class="text-sm-center position-relative">
-                        {{ error_message }}
+                    <form action="/" method="post" class="form-control-static">
+                        <div class="form-group">
+                            <label class="sr-only">username</label>
+                            <input type="text" class="form-control form-control-md" placeholder="Username"
+                                   name="username" maxlength="20"
+                                   required="required"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only">email</label>
+                            <input type="email" class="form-control form-control-md" placeholder="Email" name="email"
+                                   required="required"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only">phone</label>
+                            <input type="tel" class="form-control form-control-md" placeholder="Phone Number"
+                                   name="phone" maxlength="11"
+                                   required="required"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only">password</label>
+                            <input type="password" class="form-control form-control-md" placeholder="Password"
+                                   name="password" required="required"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only">confirm password</label>
+                            <input type="password" class="form-control form-control-md" placeholder="Confirm Password"
+                                   name="passwordConf" required="required"/>
+                        </div>
+                        <button id="sign-up-btn" class="btn btn-info form-control">Sign Up</button>
+                    </form>
+
+                    <br>
+
+                    <div class="text-center">
+                        <p class="small">Already have an account?</p>
+                        <a href="/login" class="btn btn-outline-info" role="button">Login</a>
                     </div>
-                {{/if}}
-
-                <form action="/" method="post" class="form-control-static">
-                    <div class="form-group">
-                        <label class="sr-only">username</label>
-                        <input type="text" class="form-control form-control-sm" placeholder="Username" name="username" maxlength="20"
-                               required="required"/>
-                    </div>
-                    <div class="form-group">
-                        <label class="sr-only">email</label>
-                        <input type="email" class="form-control form-control-sm" placeholder="Email" name="email"
-                               required="required"/>
-                    </div>
-                    <div class="form-group">
-                        <label class="sr-only">phone</label>
-                        <input type="tel" class="form-control form-control-sm" placeholder="Phone Number" name="phone" maxlength="11"
-                               required="required"/>
-                    </div>
-                    <div class="form-group">
-                        <label class="sr-only">password</label>
-                        <input type="password" class="form-control form-control-sm" placeholder="Password"
-                               name="password" required="required"/>
-                    </div>
-                    <div class="form-group">
-                        <label class="sr-only">confirm password</label>
-                        <input type="password" class="form-control form-control-sm" placeholder="Confirm Password"
-                               name="passwordConf" required="required"/>
-                    </div>
-                    <button class="btn btn-info form-control">Sign Up</button>
-                </form>
-
-                <br>
-
-                <div class="text-xs-center">
-                    <p class="small">Already have an account?</p>
-                    <a href="/login" class="btn btn-info-outline" role="button">Login</a>
+                    <br>
                 </div>
-                <br>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>

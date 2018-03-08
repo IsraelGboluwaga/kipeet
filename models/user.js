@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
+const ResponseMessages = require('../config/constants').responseMessages;
 
 
 const userSchema =
@@ -23,7 +24,7 @@ userSchema.statics.authenticate = (email, password, next) => {
             } else if (!user) {
                 err = new Error();
                 err.status = 401;
-                err.message = 'User not found';
+                err.message = ResponseMessages.NOT_USER;
                 return next(err);
             }
             bcrypt.compare(password, user.password, function (err, result) {
@@ -32,7 +33,7 @@ userSchema.statics.authenticate = (email, password, next) => {
                 } else {
                     err = new Error();
                     err.status = 400;
-                    err.message = 'Incorrect password';
+                    err.message = ResponseMessages.INCORRECT_PASSWORD;
                     return next(err);
                 }
             })

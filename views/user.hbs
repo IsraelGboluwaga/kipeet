@@ -1,8 +1,105 @@
-{{> header }}
+<nav class="navbar navbar-expand-lg navbar-light bg-inverse" style="border-bottom: #17a2b8 1px solid">
+    <a class="navbar-brand" href="#"><span class="app-color display-4">{{ title }}</span></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-<h1>Here</h1>
-{{ name }}
-<hr>
-{{ taskNumber }}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="false" aria-expanded="false">
+                    Edit Profile
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item bg-light" href="#">Change Username</a>
+                    <a class="dropdown-item bg-light" href="#">Change Password</a>
+                    <a class="dropdown-item bg-light" href="#">Change Email</a>
+                    <a class="dropdown-item bg-light" href="#">Change Phone</a>
+                </div>
+            </li>
+        </ul>
+        <div class="form-inline my-2 my-lg-0">
+            <a href="/logout">
+                <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Logout</button>
+            </a>
+        </div>
+    </div>
+</nav>
 
-{{> footer }}
+
+<div class="user-container justify-content-center align-items-center col-sm-8">
+    <div>
+        <div><h5>Number of tasks: <span class="label label-info">{{tasks}}</span></h5></div>
+        <div id="add-and-cancel">
+            <div class="form-group">
+                <a id="add-task" href='#'>
+                    <button class="btn btn-outline-info my-2 my-sm-0" type="button">Add Task</button>
+                </a>
+            </div>
+            <div class="form-group">
+                <a id="cancel-add-task" href='#'>
+                    <button class="btn btn-danger my-2 my-sm-0" type="button" style="background-color: #f54739">Cancel
+                    </button>
+                </a>
+            </div>
+            <div class="form-group">
+                <a id="save-task" href='#'>
+                    <button class="btn btn-success my-2 my-sm-0" type="button">Save</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <form action="" method="post" id="add-task-block" class="form-control-static">
+        <div class="form-group">
+            <label class="sr-only">Add Task</label>
+            <input type="text" class="form-control form-control-md" placeholder="Title" name="task_title" maxlength="60"
+                   required="required"/>
+        </div>
+        <div>
+            <label class="sr-only">Task Body</label>
+            <textarea type="text" class="form-control form-control-md" placeholder="Body" rows="4" name="task_body"
+                      required="required"></textarea>
+        </div>
+        <br>
+    </form>
+
+    <div class="card">
+        <div class="card-header">
+            <h5 id="task-title">Panel Heading</h5>
+            <div class="task-body-block list-inline" style="padding: 0;">
+                <span><a href="#" class="task-link">View</a></span>
+                <span> | </span>
+                <span><a href="#" class="task-link">Edit</a></span>
+            </div>
+        </div>
+
+        <div class="task-body-block card-block">
+            <!--<p class="card-text">Panel Content</p>-->
+            <blockquote class="card-blockquote">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                <footer>Created on: <cite title="Source Title">dd/mm/yy</cite></footer>
+            </blockquote>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#add-task').on('click', function () {
+        $('#add-task-block, #cancel-add-task, #save-task').show();
+    });
+
+    $('#cancel-add-task').on('click', function () {
+        $('#add-task-block, #cancel-add-task, #save-task').hide();
+    });
+
+    $('#save-task').on('click', function () {
+        $('#add-task-block, #cancel-add-task, #save-task').hide();
+    });
+
+        $('#task-title').on('click', function () {
+            $('.task-body-block').toggle();
+        });
+</script>

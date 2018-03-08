@@ -1,5 +1,5 @@
 setTimeout(function () {
-    $("#error-div").hide(500).empty();
+    $(".error-div").hide(500).empty();
 }, 3500);
 
 const options = {

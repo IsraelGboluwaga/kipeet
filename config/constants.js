@@ -1,3 +1,5 @@
+let self = this;
+
 module.exports.constants = {
     ALREADY_REGISTERED_USER: 'Looks like you\'re already a registered user. Kindly login.',
     APP_NAME: 'kipeet',
@@ -24,16 +26,28 @@ module.exports.figures = {
     MIN_PASSWORD_LENGTH: 6
 };
 
-let here = this;
-
 module.exports.templateText = {
-    title: here.constants.APP_NAME,
-    header: here.constants.APP_NAME,
-    welcome_message: here.constants.WELCOME_MESSAGE
+    title: self.constants.APP_NAME,
+    header: self.constants.APP_NAME,
+    welcome_message: self.constants.WELCOME_MESSAGE
 };
 
 module.exports.loginTemplate = {
-    title: here.constants.APP_NAME,
-    header: here.constants.APP_NAME,
-    welcome_message: here.constants.USER_WELCOME
+    title: self.constants.APP_NAME,
+    header: self.constants.APP_NAME,
+    welcome_message: self.constants.USER_WELCOME
+};
+
+module.exports.dashboard = {
+    title: self.constants.APP_NAME
+};
+
+module.exports.responseMessages = {
+    SUCCESS: 'success',
+    ERROR: 'error',
+    TASK_SAVED: 'Task successfully saved',
+    TASK_DELETED: 'Task successfully deleted',
+    NOT_AUTHORIZED: 'You are not authorized to access this resource',
+    NOT_USER: `You\'re not registered in ${self.constants.APP_NAME} yet. Kindly click on register to signup.`,
+    INCORRECT_PASSWORD: 'Incorrect password. Please try again',
 };
