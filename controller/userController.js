@@ -1,5 +1,4 @@
 const Auth = require('./authController');
-const Dashboard = require('../config/constants').dashboard;
 
 
 const getSignIn = (req, res, next) => {
