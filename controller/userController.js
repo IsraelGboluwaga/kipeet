@@ -1,19 +1,6 @@
-const Auth = require('./authController');
+const Auth = require('../controller/AuthController');
+const Dashboard = require('../config/constants').dashboard;
 
-
-const getSignIn = (req, res, next) => {
-    Auth.preventReloginOrSignup(req, res, next)
-        .then((user) => {
-            if (user) {
-                return res.redirect(`/user/${user.username}`);
-            }
-
-            return next()
-        })
-        .catch((error) => {
-            return error;
-        })
-};
 
 const getUserHome = (req, res, next) => {
     Auth.validateLoggedInUser(req, res, next)
@@ -29,6 +16,5 @@ const getUserHome = (req, res, next) => {
 };
 
 module.exports = {
-    getUserHome,
-    getSignIn
+    getUserHome
 };
