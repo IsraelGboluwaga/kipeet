@@ -133,12 +133,12 @@ const login = (req, res, next) => {
     })
 };
 
-const logout = (req, res, next) => {
+const logout = (req, res) => {
     if (req.session) {
         // delete session object
         req.session.destroy(function (err) {
             if (err)
-                return next(err);
+                return err;
             return res.redirect('/login');
 
         });
@@ -159,7 +159,6 @@ const validateLoggedInUser = (req, res, next) => {
             }
 
             if (!user) {
-                templateText.error_message = ResponseMessages.NOT_AUTHORIZED;
                 return res.redirect('/login');
             } else {
                 return user;

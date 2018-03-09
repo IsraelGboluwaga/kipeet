@@ -12,6 +12,7 @@ const hbs = require('hbs');
 const appRoutes = require('./routes/index');
 const activity = require('./routes/activity');
 const login = require('./routes/login');
+const taskApi = require('./routes/taskApi');
 
 require('dotenv').config();
 const app = express();
@@ -77,6 +78,7 @@ app.use('/health', (req, res) => {
 app.use('/', appRoutes);
 app.use('/login', login);
 app.use('/user', activity);
+app.use('/api/', taskApi);
 app.get('*', function (req, res) {
     res.status(404);
     res.render('404');

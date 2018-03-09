@@ -2,31 +2,24 @@ const express = require('express');
 const router = express.Router();
 
 const Task = require('../models/task');
-const User = require('../models/user');
-const Authenticate = require('../controller/auth');
+const Constants = require('../config/constants');
+const  Auth = require('../controller/authController');
+const UserController = require('../controller/userController');
+const TaskController = require('../controller/taskController');
+
+
 
 //User's home
-router.get('/:username', (req, res, next) => {
+router.get('/:username', UserController.getUserHome, (req, res) => {
+    TaskController.getAllTasks(req, res, (taskObj) => {
+        let dashboard = {
+            title: Constants.constants.APP_NAME,
+            tasks: taskObj.tasks,
+            task_length: taskObj.task_length
+        };
 
-    User.findOne(
-        {
-            _id: req.session.userId,
-            username: req.params.username
-        },
-        (err, user) => {
-            if (err) {
-                return res.redirect('/login');
-            }
-
-            if (!user) {
-                next();
-            } else {
-                res.render('user', {
-                    name: req.params.username,
-                    taskNumber: req.body.tasks ? req.body.tasks.length : 0
-                })
-            }
-        });
+        res.render('user', dashboard);
+    });
 });
 
 //GET page to task
@@ -54,7 +47,7 @@ router.post('/:username/addTask', function (req, res, next) {
 
 
 // GET logout
-router.get('/:username/logout', Authenticate.logout);
+router.get('/:username/logout', Auth.logout);
 
 
 module.exports = router;
