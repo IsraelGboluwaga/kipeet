@@ -78,7 +78,6 @@
     });
 
     $('.task-delete').on('click', function (e) {
-        console.log('Ode bi');
         e.preventDefault();
         var id = $(this).attr('id');
 
@@ -86,11 +85,9 @@
             url: '/api/tasks/delete/' + id.substr(4),
             type: 'DELETE',
             success: function () {
-                console.log('on success');
                 location.reload(true);
             },
             error: function () {
-                console.log('on error');
                 location.reload(false);
             }
         });
