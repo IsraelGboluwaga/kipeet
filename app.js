@@ -80,8 +80,7 @@ app.use('/login', login);
 app.use('/user', activity);
 app.use('/api/', taskApi);
 app.get('*', function (req, res) {
-    res.status(404);
-    res.render('404');
+    res.status(404).render('404');
 });
 
 // catch 404 and forward to error handler

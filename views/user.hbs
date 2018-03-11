@@ -41,14 +41,14 @@
         <div class="card">
             <div class="card-header" id="{{ this._id }}">
                 <h6 class="task-title">{{ this.title }}</h6>
-                <div class="task-body-block list-inline" id="togg-{{ this._id }}" style="padding: 0;">
+                <div class="task-body-block list-inline" id="tog-options-{{ this._id }}" style="padding: 0;">
                     <small><a href="" class="task-link">Edit</a></small>
                     <span> | </span>
                     <small><a href="" id="del-{{ this._id }}" class="task-link task-delete">Delete</a></small>
                 </div>
             </div>
 
-            <div class="task-body-block card-block" id="tog-{{ this._id }}">
+            <div class="task-body-block card-block" id="tog-body-{{ this._id }}">
                 <blockquote class="card-blockquote">
                     <p>{{ this.body }}</p>
                     <footer>Created on: <cite title="Source Title">{{ this.created_at }}</cite></footer>
@@ -73,8 +73,8 @@
     });
 
     $('.card-header').on('click', function () {
-        $('#tog-' + $(this).attr('id')).toggle();
-        $('#togg-' + $(this).attr('id')).toggle();
+        $('#tog-options-' + $(this).attr('id')).toggle(100);
+        $('#tog-body-' + $(this).attr('id')).toggle(400);
     });
 
     $('.task-delete').on('click', function (e) {
