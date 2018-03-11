@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const Constants = require('../config/constants');
-const Auth = require('../controller/authController');
+const Auth = require('../config/auth');
 const UserController = require('../controller/userController');
-const Authenticate = require('../controller/authController');
+const Authenticate = require('../config/auth');
 
 
 

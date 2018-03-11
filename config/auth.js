@@ -1,11 +1,10 @@
-const Utils = require('../config/Utils');
+const Utils = require('./utils');
 const User = require('../models/user');
-const ConstantClass = require("../config/constants");
+const ConstantClass = require("./constants");
 const Constants = ConstantClass.constants;
-const ResponseMessages = ConstantClass.responseMessages;
 let Figures = ConstantClass.figures;
-let templateText = require('../config/constants').templateText;
-let loginTemplate = require('../config/constants').loginTemplate;
+let templateText = require('./constants').templateText;
+let loginTemplate = require('./constants').loginTemplate;
 
 
 const register = (req, res) => {
@@ -135,7 +134,7 @@ const login = (req, res, next) => {
 
 const logout = (req, res) => {
     if (req.session) {
-        // delete session object
+        // delete.hbs session object
         req.session.destroy(function (err) {
             if (err)
                 return err;
@@ -159,7 +158,7 @@ const validateLoggedInUser = (req, res, next) => {
             }
 
             if (!user) {
-                return res.redirect('/login');
+                return next();
             } else {
                 return user;
             }
@@ -170,12 +169,15 @@ const preventReloginOrSignup = (req, res, next) => {
     if (req.session.userId) {
         return User.findById(req.session.userId, (err, user) => {
             if (err) {
+                console.log('err in prevent login')
                 next(err);
             }
 
             if (user) {
+                console.log('users in prevent login');
                 return user;
             } else {
+                console.log(' not users  in prevent login');
                 return next();
             }
         });

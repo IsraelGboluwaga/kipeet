@@ -10,9 +10,9 @@ const MongoStore = require('connect-mongo')(session);
 const hbs = require('hbs');
 
 const appRoutes = require('./routes/index');
-const activity = require('./routes/activity');
+const activity = require('./routes/user_activity');
 const login = require('./routes/login');
-const taskApi = require('./routes/taskApi');
+const taskApi = require('./routes/task_api');
 
 require('dotenv').config();
 const app = express();
@@ -55,7 +55,7 @@ let session_data =
         resave: false,
         saveUninitialized: true,
         cookie: {},
-        maxAge: 3600000,
+        expires: 3600000,
         store: new MongoStore({
             mongooseConnection: db_connection
         })

@@ -1,22 +1,20 @@
 const Task = require('../models/task');
 
-const getAllTasks = (req, res, cb) => {
-    Task.find({user_id: req.session.userId}, (err, tasks) => {
-        if (err)
-            res.send(err);
+const getAllTasks = (req, res) => {
+    return Task.find({user_id: req.session.userId}).sort([['created_at', 'desc']]).exec(
+        (err, tasks) => {
+            if (err)
+                res.send(err);
 
-        let response = {
-            task_length: tasks.length,
-            tasks: tasks
-        };
 
-        cb(response);
-    });
+            return tasks;
+            // return res.json(tasks);
+        }
+    );
 };
 
 const addTask = (req, res, next) => {
-    // const user_id = req.session.userId,
-    const user_id = req.body.user_id,
+    const user_id = req.session.userId,
         task_title = req.body.title,
         task_body = req.body.body;
 
@@ -25,26 +23,32 @@ const addTask = (req, res, next) => {
             next(err);
 
         if (task) {
-            // return getAllTasks(task);
-            return res.json(task);
+            return res.redirect(`/user/${req.params.username}`);
         }
     });
 };
 
 const deleteTask = (req, res, next) => {
+    const task_id = req.params.task_id;
     return Task.remove({_id: task_id}, (err, deleted) => {
-        if (err)
+        if (err) {
+            console.log('Here at rm err');
             next(err);
-
-        if (deleted) {
-            // return getAllTasks(res)
         }
+
+        if (deleted)
+            res.redirect(`/user/${req.params.username}`);
+
     });
+    // return getAllTasks(req, res);
+    // return res.redirect('/')
+    // return res.redirect(`/user/${req.params.username}`);
 };
 
 
 const updateTask = (req, res, next) => {
-    return Task.update({_id: req.params.task_id}, (err, updated) => {
+    const task_id = req.params._id;
+    return Task.findOneAndUpdate({_id: task_id}, (err, updated) => {
         if (err)
             next(err);
 

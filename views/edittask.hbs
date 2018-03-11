@@ -1,0 +1,17 @@
+{{> nav }}
+
+<form action="" id="add-task-block" class="form-control-static">
+    <div class="form-group">
+        <label class="sr-only">Edit Task</label>
+        <input type="text" class="form-control form-control-md" placeholder="Title" name="title" maxlength="60"
+               required="required"/>
+    </div>
+    <div class="form-group">
+        <label class="sr-only">Task Body</label>
+        <textarea class="form-control form-control-md" placeholder="Body" rows="4" name="body"
+                  required="required"></textarea>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-success my-2 my-sm-0" type="submit">Save</button>
+    </div>
+</form>
