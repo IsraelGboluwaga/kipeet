@@ -1,15 +1,15 @@
 {{> nav }}
 
 <div class="user-container justify-content-center align-items-center col-sm-6">
-    <h5 class="p-b-3">Edit Task</h5>
+    <h5 class="p-b-3">Edit Peet</h5>
     <form action="" id="edit-task-block" class="form-control-static">
         <div class="form-group">
-            <label class="sr-only">Edit Task</label>
+            <label class="sr-only">Edit Peet</label>
             <input type="text" id="edit-task-title" class="form-control form-control-md" name="title" maxlength="60"
                    value="{{ task.title }}" required="required"/>
         </div>
         <div class="form-group">
-            <label class="sr-only">Task Body</label>
+            <label class="sr-only">Peet Body</label>
             <textarea id="edit-task-body" class="form-control form-control-md"  rows="4" name="body"
                       required="required">{{ task.body }}</textarea>
         </div>

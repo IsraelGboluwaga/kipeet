@@ -1,7 +1,5 @@
-# toDoApp
-A simple to do app with node-js
+# Kipeet
 
-Make simple tasks in ordered form on the web app
-Get reminders when due
+Kipeet keeps tasks, secrets, ideas safe for you as `peets`.
 
-**Not Completed
+To use, go to http://www.kipeet.firebaseapp.com/ and have a great time
