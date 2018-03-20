@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Constants = require('../config/constants');
 const templateText = Constants.loginTemplate;
-const Auth = require('../controller/authController');
+const Auth = require('../config/auth');
 const UserController = require('../controller/userController');
 
 

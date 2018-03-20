@@ -1,11 +1,10 @@
-const Utils = require('../config/Utils');
+const Utils = require('./utils');
 const User = require('../models/user');
-const ConstantClass = require("../config/constants");
+const ConstantClass = require("./constants");
 const Constants = ConstantClass.constants;
-const ResponseMessages = ConstantClass.responseMessages;
 let Figures = ConstantClass.figures;
-let templateText = require('../config/constants').templateText;
-let loginTemplate = require('../config/constants').loginTemplate;
+let templateText = require('./constants').templateText;
+let loginTemplate = require('./constants').loginTemplate;
 
 
 const register = (req, res) => {
@@ -90,8 +89,10 @@ const register = (req, res) => {
 
             if (user) {
                 req.session.userId = user._id;
+                setTimeout(function () {
+                    return res.redirect(`/user/${user.username}`);
+                }, 1000);
             }
-            return res.redirect(`/users/${user.username}`);
         });
 
     }).catch(() => {
@@ -133,12 +134,12 @@ const login = (req, res, next) => {
     })
 };
 
-const logout = (req, res, next) => {
+const logout = (req, res) => {
     if (req.session) {
-        // delete session object
+        // delete.hbs session object
         req.session.destroy(function (err) {
             if (err)
-                return next(err);
+                return err;
             return res.redirect('/login');
 
         });
@@ -159,8 +160,7 @@ const validateLoggedInUser = (req, res, next) => {
             }
 
             if (!user) {
-                templateText.error_message = ResponseMessages.NOT_AUTHORIZED;
-                return res.redirect('/login');
+                return next();
             } else {
                 return user;
             }

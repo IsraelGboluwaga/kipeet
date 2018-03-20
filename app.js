@@ -10,14 +10,20 @@ const MongoStore = require('connect-mongo')(session);
 const hbs = require('hbs');
 
 const appRoutes = require('./routes/index');
-const activity = require('./routes/activity');
+const activity = require('./routes/user_activity');
 const login = require('./routes/login');
+const taskApi = require('./routes/task_api');
 
 require('dotenv').config();
 const app = express();
 
 //Set db connection
-mongoose.connect(process.env.DB_URL);
+const mongoose_options = {useMongoClient: true};
+if (app.get('env') === 'development') {
+    mongoose.connect(process.env.DB_URL, mongoose_options);
+} else {
+    mongoose.connect(process.env.DB_URL_LIVE, mongoose_options);
+}
 mongoose.Promise = global.Promise;
 const db_connection = mongoose.connection;
 db_connection.on('error', console.error.bind(console, 'MongoDB connection error: '));
@@ -54,7 +60,7 @@ let session_data =
         resave: false,
         saveUninitialized: true,
         cookie: {},
-        maxAge: 3600000,
+        expires: 3600000,
         store: new MongoStore({
             mongooseConnection: db_connection
         })
@@ -77,9 +83,9 @@ app.use('/health', (req, res) => {
 app.use('/', appRoutes);
 app.use('/login', login);
 app.use('/user', activity);
+app.use('/api/', taskApi);
 app.get('*', function (req, res) {
-    res.status(404);
-    res.render('404');
+    res.status(404).render('404');
 });
 
 // catch 404 and forward to error handler
@@ -100,4 +106,5 @@ app.use(function (err, req, res, next) {
     res.render('error');
 });
 
+console.log('app listening on port: ', process.env.PORT);
 module.exports = app;

@@ -10,6 +10,10 @@ body {
     line-height: 1.5;
 }
 
+nav {
+    background-color: rgba(0,0,0,.05);
+}
+
 .photo-cover {
     background: #222 url("../img/guitar.jpg") center no-repeat;
     height: 100%;
@@ -115,4 +119,21 @@ a.login:hover {
 
 .task-link {
     color: #17a2b8;
+}
+
+a.dropdown-item:hover {
+    background-color: #17a2b8!important;
+    color: white;
+}
+
+.bd-example-modal-lg .modal-dialog{
+    display: table;
+    position: relative;
+    margin: 0 auto;
+    top: calc(50% - 24px);
+}
+
+.bd-example-modal-lg .modal-dialog .modal-content{
+    background-color: transparent;
+    border: none;
 }

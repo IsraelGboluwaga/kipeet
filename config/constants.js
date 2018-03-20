@@ -38,10 +38,6 @@ module.exports.loginTemplate = {
     welcome_message: self.constants.USER_WELCOME
 };
 
-module.exports.dashboard = {
-    title: self.constants.APP_NAME
-};
-
 module.exports.responseMessages = {
     SUCCESS: 'success',
     ERROR: 'error',

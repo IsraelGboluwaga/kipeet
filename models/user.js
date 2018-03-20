@@ -10,7 +10,7 @@ const userSchema =
         password: {type: String, required: true},
         email: {type: String, required: true},
         phone: {type: Number, required: true},
-        task: {type: Schema.Types.ObjectId, ref: 'Task'},
+        isAdmin: {type: Boolean, required: true, default: false},
         created_at: {type: Date, default: Date.now()}
     });
 
