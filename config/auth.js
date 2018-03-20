@@ -89,8 +89,10 @@ const register = (req, res) => {
 
             if (user) {
                 req.session.userId = user._id;
+                setTimeout(function () {
+                    return res.redirect(`/user/${user.username}`);
+                }, 1000);
             }
-            return res.redirect(`/users/${user.username}`);
         });
 
     }).catch(() => {
@@ -169,15 +171,12 @@ const preventReloginOrSignup = (req, res, next) => {
     if (req.session.userId) {
         return User.findById(req.session.userId, (err, user) => {
             if (err) {
-                console.log('err in prevent login')
                 next(err);
             }
 
             if (user) {
-                console.log('users in prevent login');
                 return user;
             } else {
-                console.log(' not users  in prevent login');
                 return next();
             }
         });

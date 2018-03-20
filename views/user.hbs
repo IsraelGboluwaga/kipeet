@@ -18,31 +18,32 @@
         </div>
     </div>
 
-    <form action="/api/tasks/add" method="post" id="add-task-block" class="form-control-static">
+    <div id="add-task-block" class="form-control-static">
         <div class="form-group">
             <label class="sr-only">Add Task</label>
-            <input type="text" class="form-control form-control-md" placeholder="Title" name="title" maxlength="60"
+            <input type="text" id="task-title" class="form-control form-control-md" placeholder="Title" name="title" maxlength="60"
                    required="required"/>
         </div>
         <div class="form-group">
             <label class="sr-only">Task Body</label>
-            <textarea class="form-control form-control-md" placeholder="Body" rows="4" name="body"
+            <textarea id="task-body" class="form-control form-control-md" placeholder="Body" rows="4" name="body"
                       required="required"></textarea>
         </div>
         <div class="form-group">
-            <button class="btn btn-success my-2 my-sm-0" type="submit">Save</button>
+            <button id="save-task" class="btn btn-success my-2 my-sm-0" style="margin-left: 0 !important;" type="button">Save</button>
         </div>
-    </form>
+    </div>
 
-    <!--//Not working yet-->
+    <!--//Not working yet... mean to be a modal-->
     {{> delete }}
 
+    {{#if tasks}}
     {{#each tasks}}
         <div class="card">
             <div class="card-header" id="{{ this._id }}">
                 <h6 class="task-title">{{ this.title }}</h6>
                 <div class="task-body-block list-inline" id="tog-options-{{ this._id }}" style="padding: 0;">
-                    <small><a href="" class="task-link">Edit</a></small>
+                    <small><a href="/api/tasks/edit/{{ this._id }}" class="task-link">Edit</a></small>
                     <span> | </span>
                     <small><a href="" id="del-{{ this._id }}" class="task-link task-delete">Delete</a></small>
                 </div>
@@ -50,16 +51,17 @@
 
             <div class="task-body-block card-block" id="tog-body-{{ this._id }}">
                 <blockquote class="card-blockquote">
-                    <p>{{ this.body }}</p>
-                    <footer>Created on: <cite title="Source Title">{{ this.created_at }}</cite></footer>
+                    <pre>{{ this.body }}</pre>
                 </blockquote>
             </div>
         </div>
         <br>
     {{/each}}
+    {{/if}}
 </div>
 
 <script>
+
     $('#add-task').on('click', function () {
         $('#add-task-block, #cancel-add-task, #save-task').show();
     });
@@ -69,7 +71,28 @@
     });
 
     $('#save-task').on('click', function () {
-        $('#add-task-block, #cancel-add-task, #save-task').hide();
+        var title = $('#task-title').val();
+        var body = $('#task-body').val();
+
+        if (title == "" || body == "") {
+            return;
+        }
+
+        //Use ajax to add task
+        $.ajax({
+            url: '/api/tasks/add',
+            type: 'POST',
+            data: {
+                title: title,
+                body: body
+            },
+            success: function () {
+                location.reload(true);
+            },
+            error: function() {
+                location.reload(false);
+            }
+        });
     });
 
     $('.card-header').on('click', function () {

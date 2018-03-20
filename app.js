@@ -18,7 +18,12 @@ require('dotenv').config();
 const app = express();
 
 //Set db connection
-mongoose.connect(process.env.DB_URL);
+const mongoose_options = {useMongoClient: true};
+if (app.get('env') === 'development') {
+    mongoose.connect(process.env.DB_URL, mongoose_options);
+} else {
+    mongoose.connect(process.env.DB_URL_LIVE, mongoose_options);
+}
 mongoose.Promise = global.Promise;
 const db_connection = mongoose.connection;
 db_connection.on('error', console.error.bind(console, 'MongoDB connection error: '));
@@ -101,4 +106,5 @@ app.use(function (err, req, res, next) {
     res.render('error');
 });
 
+console.log('app listening on port: ', process.env.PORT);
 module.exports = app;
