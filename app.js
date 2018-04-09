@@ -74,7 +74,7 @@ if (app.get('env') === 'production') {
 }
 
 //For routing. I think it's good practice to have the app routing somewhere else
-app.use('/health', (req, res) => {
+app.use('/health', function (req, res) {
     return res.json({
         status: 'Up',
         data: 'O sha pran pran'
