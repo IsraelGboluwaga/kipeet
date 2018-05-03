@@ -20,7 +20,7 @@ const app = express();
 //Set db connection
 const mongoose_options = {useMongoClient: true};
 if (app.get('env') === 'development') {
-    mongoose.connect(process.env.DB_URL_LIVE, mongoose_options);
+    mongoose.connect(process.env.DB_URL, mongoose_options);
 } else {
     mongoose.connect(process.env.DB_URL_LIVE, mongoose_options);
 }
