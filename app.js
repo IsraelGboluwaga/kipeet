@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const hbs = require('hbs');
+const helmet = require('helmet');
 
 const appRoutes = require('./routes/index');
 const activity = require('./routes/user_activity');
@@ -19,7 +20,7 @@ const app = express();
 
 //Set db connection
 const mongoose_options = {useMongoClient: true};
-if (app.get('env') === 'development') {
+if (!process.env.NODE_ENV === 'production' && !app.get('env') === 'production') {
     mongoose.connect(process.env.DB_URL, mongoose_options);
 } else {
     mongoose.connect(process.env.DB_URL_LIVE, mongoose_options);
@@ -33,6 +34,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/views/partials');
 
+app.use(helmet());
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
