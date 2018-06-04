@@ -29,23 +29,25 @@
 </div>
 
 <script>
-    $('#save').on('click', function () {
-        var title = $('#edit-task-title').val();
-        var body = $('#edit-task-body').val();
+    $(document).ready(function () {
+        $('#save').on('click', function () {
+            var title = $('#edit-task-title').val();
+            var body = $('#edit-task-body').val();
 
-        $.ajax({
-            url: '/api/tasks/update/{{ task._id }}',
-            type: 'PUT',
-            data: {
-                title: title,
-                body: body
-            },
-            success: function () {
-                location.href = '/user/{{ username }}';
-            },
-            error: function () {
-                location.href = '/user/{{ username }}';
-            }
+            $.ajax({
+                url: '/api/tasks/update/{{ task._id }}',
+                type: 'PUT',
+                data: {
+                    title: title,
+                    body: body
+                },
+                success: function () {
+                    location.href = '/user/{{ username }}';
+                },
+                error: function () {
+                    location.href = '/user/{{ username }}';
+                }
+            });
         });
-    });
+    })
 </script>

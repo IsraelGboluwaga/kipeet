@@ -72,34 +72,36 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.6/typed.js"></script>
 <script>
-    var options = {
-        strings: ['"kipeet"'],
-        typeSpeed: 60,
-        // time before typing starts
-        startDelay: 3000,
-        // backspacing speed
-        backSpeed: 200,
-        // time before backspacing
-        backDelay: 5000,
-        // loop
-        loop: true,
-        // false = infinite
-        loopCount: 5,
-        // show cursor
-        showCursor: false,
-        // character for cursor
-        cursorChar: "|",
-        // attribute to type (null == text)
-        attr: null,
-        // either html or text
-        contentType: 'html',
-    };
-    var typed = new Typed("#typedJS", options);
+    $(document).ready(function () {
+        var options = {
+            strings: ['"kipeet"'],
+            typeSpeed: 60,
+            // time before typing starts
+            startDelay: 3000,
+            // backspacing speed
+            backSpeed: 200,
+            // time before backspacing
+            backDelay: 5000,
+            // loop
+            loop: true,
+            // false = infinite
+            loopCount: 5,
+            // show cursor
+            showCursor: false,
+            // character for cursor
+            cursorChar: "|",
+            // attribute to type (null == text)
+            attr: null,
+            // either html or text
+            contentType: 'html',
+        };
+        var typed = new Typed("#typedJS", options);
 
-    $('#sign-up-btn').on('click', function () {
-        $('.modal').modal('show');
-        setTimeout(function () {
-            $('.modal').modal('hide');
-        }, 3000);
+        $('#sign-up-btn').on('click', function () {
+            $('.modal').modal('show');
+            setTimeout(function () {
+                $('.modal').modal('hide');
+            }, 3000);
+        });
     });
 </script>
