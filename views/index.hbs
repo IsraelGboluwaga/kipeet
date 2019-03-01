@@ -73,6 +73,8 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.6/typed.js"></script>
 <script>
     $(document).ready(function () {
+        mixpanel.track("Page loaded");
+        
         var options = {
             strings: ['"kipeet"'],
             typeSpeed: 60,
