@@ -121,7 +121,7 @@ const login = (req, res, next) => {
         return res.redirect('/login');
     }
 
-    User.authenticate(email, password, (err, user) => {
+    return User.authenticate(email, password, (err, user) => {
         if (err) {
             loginTemplate.error_message = err.message;
             return res.redirect('/login');
